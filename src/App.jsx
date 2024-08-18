@@ -58,7 +58,6 @@ function App() {
     try {
       const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
       const { data } = await axios.get(url)
-      console.log(data)
 
       setWeatherList(data.list)
       setError(null)
@@ -147,7 +146,7 @@ function App() {
   if (error) return <Error error={error} />
 
   return (
-    <div className='bg-gray-900 w-full min-w-[440px]'>
+    <div className='bg-gray-900 w-full h-full min-w-[350px]'>
       <WeatherCard todayWeather={todayWeather} />
       <WeatherReport todayWeather={todayWeather} />
       <WeatherButton

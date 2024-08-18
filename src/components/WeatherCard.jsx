@@ -48,7 +48,7 @@ const WeatherCard = ({ todayWeather }) => {
 
   return (
     <div
-      className='w-full h-full bg-slate-400 min-w-[440px] min-h-[500px]'
+      className='w-full h-full bg-slate-400 min-w-[350px] min-h-[500px]'
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',

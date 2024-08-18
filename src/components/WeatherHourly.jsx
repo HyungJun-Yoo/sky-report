@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { format } from 'date-fns'
 
 const HourlyForecastTable = ({ weatherList }) => {
+  const [currentPage, setCurrentPage] = useState(0)
+
   const now = new Date()
   const currentHour = now.getHours()
   const currentDate = format(now, 'yyyy-MM-dd')
@@ -37,13 +39,7 @@ const HourlyForecastTable = ({ weatherList }) => {
   }, {})
 
   const dates = Object.keys(groupedData)
-  const [currentPage, setCurrentPage] = useState(0)
-  const itemsPerPage = 1
-
-  const currentEntries = dates.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  )
+  const handleDate = dates.slice(currentPage, currentPage + 1)
 
   const handleNext = () => {
     if (currentPage < dates.length - 1) {
@@ -58,27 +54,27 @@ const HourlyForecastTable = ({ weatherList }) => {
   }
 
   return (
-    <div className='overflow-hidden text-stone-300 p-4 mt-4 border-t-2 border-gray-600'>
+    <div className='overflow-hidden text-stone-300 p-4 mt-4 border-t-2 border-gray-600 min-w-[350px]'>
       <h2 className='text-4xl font-bold mb-12 text-center'>시간별 예보</h2>
-      <div className='flex items-center justify-between mb-4'>
+      <div className='flex items-center justify-between mb-4 p-4'>
         <button
           onClick={handlePrevious}
           disabled={currentPage === 0}
           className={`bg-gray-600 text-gray-200 px-4 py-2 rounded hover:bg-gray-500 transition ${
-            currentPage === 0 ? 'opacity-50 cursor-not-allowed' : ''
+            currentPage === 0 ? 'opacity-20 cursor-not-allowed' : ''
           }`}
         >
           ◀
         </button>
 
-        <h2 className='text-lg font-bold'>{currentEntries[0]}</h2>
+        <h2 className='text-lg font-bold'>{handleDate}</h2>
 
         <button
           onClick={handleNext}
           disabled={currentPage >= dates.length - 1}
           className={`bg-gray-600 text-gray-200 px-4 py-2 rounded hover:bg-gray-500 transition ${
             currentPage >= dates.length - 1
-              ? 'opacity-50 cursor-not-allowed'
+              ? 'opacity-20 cursor-not-allowed'
               : ''
           }`}
         >
@@ -86,39 +82,37 @@ const HourlyForecastTable = ({ weatherList }) => {
         </button>
       </div>
 
-      {currentEntries.map((date) => (
-        <div key={date} className='mb-6 flex justify-center'>
-          <table className='min-w-full max-w-4xl bg-gray-800 border border-gray-700'>
-            <thead>
-              <tr className='bg-gray-700 text-gray-300 uppercase text-sm leading-normal'>
-                <th className='py-3 px-6 text-left'>시간</th>
-                <th className='py-3 px-6 text-left'>기온 (°C)</th>
-                <th className='py-3 px-6 text-left'>강수확률 (%)</th>
-                <th className='py-3 px-6 text-left'>강수량 (mm)</th>
-                <th className='py-3 px-6 text-left'>바람 (m/s)</th>
-                <th className='py-3 px-6 text-left'>습도 (%)</th>
-              </tr>
-            </thead>
-            <tbody className='text-gray-400 text-sm font-light'>
-              {groupedData[date].map(
-                ({ time, temp, pop, rain, wind, humidity }) => (
-                  <tr
-                    key={time}
-                    className='border-b border-gray-600 hover:bg-gray-700'
-                  >
-                    <td className='py-3 px-6'>{time}</td>
-                    <td className='py-3 px-6'>{temp}°C</td>
-                    <td className='py-3 px-6'>{(pop * 100).toFixed(0)}%</td>
-                    <td className='py-3 px-6'>{rain.toFixed(1)} mm</td>
-                    <td className='py-3 px-6'>{wind.toFixed(1)} m/s</td>
-                    <td className='py-3 px-6'>{humidity}%</td>
-                  </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
-      ))}
+      <div className='mb-6 overflow-x-auto'>
+        <table className='w-full min-w-[800px] bg-gray-800 border border-gray-700'>
+          <thead>
+            <tr className='bg-gray-700 text-gray-300 uppercase text-sm leading-normal'>
+              <th className='py-3 px-6 text-left'>시간</th>
+              <th className='py-3 px-6 text-left'>기온 (°C)</th>
+              <th className='py-3 px-6 text-left'>강수확률 (%)</th>
+              <th className='py-3 px-6 text-left'>강수량 (mm)</th>
+              <th className='py-3 px-6 text-left'>바람 (m/s)</th>
+              <th className='py-3 px-6 text-left'>습도 (%)</th>
+            </tr>
+          </thead>
+          <tbody className='text-gray-400 text-sm font-light'>
+            {groupedData[handleDate].map(
+              ({ time, temp, pop, rain, wind, humidity }) => (
+                <tr
+                  key={time}
+                  className='border-b border-gray-600 hover:bg-gray-700'
+                >
+                  <td className='py-3 px-6'>{time}</td>
+                  <td className='py-3 px-6'>{temp}°C</td>
+                  <td className='py-3 px-6'>{(pop * 100).toFixed(0)}%</td>
+                  <td className='py-3 px-6'>{rain.toFixed(1)} mm</td>
+                  <td className='py-3 px-6'>{wind.toFixed(1)} m/s</td>
+                  <td className='py-3 px-6'>{humidity}%</td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

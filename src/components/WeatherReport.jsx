@@ -15,7 +15,7 @@ const WeatherReport = ({ todayWeather }) => {
   })
 
   return (
-    <div className='flex justify-between items-center p-4 min-w-[440px]'>
+    <div className='flex justify-between items-center p-4 min-w-[350px]'>
       <div className='flex gap-2'>
         <div className='flex items-end'>
           <p className='text-stone-300 text-sm'>최고</p>
