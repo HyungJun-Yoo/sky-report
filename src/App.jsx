@@ -8,8 +8,8 @@ import Loading from './components/Loading'
 import Error from './components/Error'
 import WeatherHourly from './components/WeatherHourly'
 import WeatherState from './components/WeatherState'
+import SearchButton from './components/searchButton'
 
-const cities = ['current', 'hanoi', 'paris', 'new york', 'seoul']
 const API_KEY = import.meta.env.VITE_API_KEY
 
 function App() {
@@ -18,6 +18,13 @@ function App() {
   const [city, setCity] = useState('current')
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [buttonList, setButtonList] = useState([
+    'current',
+    'hanoi',
+    'paris',
+    'new york',
+    'seoul',
+  ])
 
   // 현재 위치 가져오기
   const getCurrentLocation = () => {
@@ -78,6 +85,8 @@ function App() {
 
       setTodayWeather(data)
       setError(null)
+
+      if (!buttonList.includes(city)) setButtonList((list) => [...list, city])
     } catch (err) {
       console.log(err?.message)
       setError('날씨 정보를 가져오는 데 실패했습니다.')
@@ -144,17 +153,26 @@ function App() {
 
   if (loading || !todayWeather || !weatherList)
     return <Loading loading={loading} />
-  if (error) return <Error error={error} />
+  if (error)
+    return (
+      <div className='bg-gray-900 w-full h-screen flex justify-center items-center'>
+        <div className='w-full'>
+          <Error error={error} />
+          <SearchButton handleSearch={setCity} />
+        </div>
+      </div>
+    )
 
   return (
     <div className='bg-gray-900 w-full h-full min-w-[350px]'>
       <WeatherCard todayWeather={todayWeather} />
       <WeatherReport todayWeather={todayWeather} />
       <WeatherButton
-        cities={cities}
+        buttonList={buttonList}
         handleCityChange={handleCityChange}
         selectedCity={city}
       />
+      <SearchButton handleSearch={setCity} />
       <WeatherState todayWeather={todayWeather} />
       <WeatherHourly weatherList={weatherList} />
     </div>

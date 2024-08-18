@@ -55,7 +55,7 @@ const WeatherCard = ({ todayWeather }) => {
         backgroundPosition: 'center',
       }}
     >
-      <div className='w-full min-h-[500px] flex flex-col justify-end p-4 gap-4'>
+      <div className='w-full max-w-[1280px] min-h-[500px] mx-auto flex flex-col justify-end p-4 gap-4'>
         <div className='flex gap-2'>
           <div className='flex gap-1'>
             <h2 className='text-stone-100 font-bold text-4xl'>

@@ -20,8 +20,8 @@ const WeatherState = ({ todayWeather }) => {
   const precipitation = rain ? rain['1h'] || 0 : 0 // 최근 1시간 강수량
 
   return (
-    <div className='flex justify-center items-center text-gray-300 rounded-lg mt-8 p-4'>
-      <div className='w-full bg-gray-800 min-w-[350px] max-w-[1280px] p-4'>
+    <div className='flex justify-center items-center text-gray-300 mt-8 p-4'>
+      <div className='w-full bg-gray-800 min-w-[350px] max-w-[1280px] p-4 rounded-lg'>
         <h2 className='text-2xl font-bold mb-4 text-center'>현재 날씨 정보</h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
           <div className='bg-gray-700 p-4 rounded-lg flex flex-col items-center'>

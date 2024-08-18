@@ -1,10 +1,10 @@
 import React from 'react'
 
-const WeatherButton = ({ cities, handleCityChange, selectedCity }) => {
+const WeatherButton = ({ buttonList, handleCityChange, selectedCity }) => {
   return (
     <div className='flex justify-center w-full h-full p-4 min-w-[350px]'>
       <div className='grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5'>
-        {cities.map((city) => (
+        {buttonList.map((city) => (
           <button
             key={city}
             className={`${

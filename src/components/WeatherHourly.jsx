@@ -55,7 +55,7 @@ const HourlyForecastTable = ({ weatherList }) => {
 
   return (
     <div className='w-full text-stone-300 p-4 mt-8 min-w-[350px] flex justify-center'>
-      <div className='w-full max-w-[1280px] bg-gray-800 p-4'>
+      <div className='w-full max-w-[1280px] bg-gray-800 p-4 rounded-lg'>
         <h2 className='text-4xl font-bold mb-12 text-center'>시간별 예보</h2>
         <div className='w-full flex items-center justify-between mb-4 p-4'>
           <button
