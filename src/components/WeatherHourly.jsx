@@ -8,7 +8,8 @@ const HourlyForecastTable = ({ weatherList }) => {
   const currentHour = now.getHours()
   const currentDate = format(now, 'yyyy-MM-dd')
 
-  const groupedData = weatherList.reduce((acc, item) => {
+  const groupData = {}
+  weatherList.forEach((item) => {
     const dt = item.dt
     const dateObj = new Date(dt * 1000)
     const kstDateObj = new Date(dateObj.getTime())
@@ -19,7 +20,7 @@ const HourlyForecastTable = ({ weatherList }) => {
       date < currentDate ||
       (date === currentDate && kstDateObj.getHours() < currentHour)
     ) {
-      return acc
+      return
     }
 
     const data = {
@@ -31,14 +32,20 @@ const HourlyForecastTable = ({ weatherList }) => {
       humidity: item.main.humidity,
     }
 
-    if (!acc[date]) {
-      acc[date] = []
+    if (!groupData[date]) {
+      groupData[date] = []
     }
-    acc[date].push(data)
-    return acc
-  }, {})
+    groupData[date].push(data)
+  })
 
-  const dates = Object.keys(groupedData)
+  const getDayOfWeek = (date) => {
+    const getDate = new Date(date)
+    const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토']
+    const dayIndex = getDate.getDay()
+    return daysOfWeek[dayIndex]
+  }
+
+  const dates = Object.keys(groupData)
   const handleDate = dates.slice(currentPage, currentPage + 1)
 
   const handleNext = () => {
@@ -68,7 +75,9 @@ const HourlyForecastTable = ({ weatherList }) => {
             ◀
           </button>
 
-          <h2 className='text-lg font-bold'>{handleDate}</h2>
+          <h2 className='text-lg font-bold'>
+            {handleDate} ({getDayOfWeek(handleDate)})
+          </h2>
 
           <button
             onClick={handleNext}
@@ -96,7 +105,7 @@ const HourlyForecastTable = ({ weatherList }) => {
               </tr>
             </thead>
             <tbody className='text-gray-200 text-sm font-light'>
-              {groupedData[handleDate].map(
+              {groupData[handleDate].map(
                 ({ time, temp, pop, rain, wind, humidity }) => (
                   <tr
                     key={time}

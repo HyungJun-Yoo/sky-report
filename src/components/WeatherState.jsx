@@ -9,15 +9,14 @@ import {
 } from 'react-icons/wi'
 
 const WeatherState = ({ todayWeather }) => {
-  // 필요한 데이터 추출
   const {
     main: { feels_like, pressure, humidity },
-    wind: { speed, deg },
+    wind: { speed },
     clouds: { all },
     rain,
   } = todayWeather
 
-  const precipitation = rain ? rain['1h'] || 0 : 0 // 최근 1시간 강수량
+  const precipitation = rain ? rain['1h'] || 0 : 0
 
   return (
     <div className='flex justify-center items-center text-gray-300 mt-8 p-4'>
@@ -41,7 +40,7 @@ const WeatherState = ({ todayWeather }) => {
           </div>
           <div className='bg-gray-700 p-4 rounded-lg flex flex-col items-center'>
             <WiWindy className='text-green-400 text-3xl mb-2' />
-            <h3 className='font-semibold'>바람 속도</h3>
+            <h3 className='font-semibold'>풍속</h3>
             <p>{speed} m/s</p>
           </div>
           <div className='bg-gray-700 p-4 rounded-lg flex flex-col items-center'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { format, formatDistanceToNow } from 'date-fns'
+import { format } from 'date-fns'
 import { ko } from 'date-fns/locale'
 
 const WeatherReport = ({ todayWeather }) => {
@@ -34,7 +34,7 @@ const WeatherReport = ({ todayWeather }) => {
         </div>
       </div>
 
-      <p className='text-stone-200 text-lg'>{formattedDateTime}</p>
+      <p className='text-stone-200 text-lg font-bold'>{formattedDateTime}</p>
     </div>
   )
 }
