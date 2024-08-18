@@ -8,7 +8,7 @@ import Loading from './components/Loading'
 import Error from './components/Error'
 import WeatherHourly from './components/WeatherHourly'
 import WeatherState from './components/WeatherState'
-import SearchButton from './components/searchButton'
+import SearchButton from './components/SearchButton'
 
 const API_KEY = import.meta.env.VITE_API_KEY
 
