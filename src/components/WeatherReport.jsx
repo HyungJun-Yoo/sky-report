@@ -15,19 +15,19 @@ const WeatherReport = ({ todayWeather }) => {
   })
 
   return (
-    <div className='flex justify-between items-center p-4 min-w-[350px]'>
+    <div className='flex justify-between items-center p-4 mx-auto max-w-[1280px] min-w-[350px]'>
       <div className='flex gap-2'>
-        <div className='flex items-end'>
+        <div className='flex items-end gap-1'>
           <p className='text-stone-300 text-sm'>최고</p>
-          <div className='flex text-stone-200 text-3xl'>
+          <div className='flex text-red-300 text-3xl'>
             {highTemp}
             <p className='text-2xl'>°</p>
           </div>
         </div>
 
-        <div className='flex items-end'>
+        <div className='flex items-end gap-1'>
           <p className='text-stone-300 text-sm'>최저</p>
-          <div className='flex text-stone-200'>
+          <div className='flex text-blue-300'>
             <p className='text-3xl'>{lowTemp}</p>
             <p className='text-2xl'>°</p>
           </div>

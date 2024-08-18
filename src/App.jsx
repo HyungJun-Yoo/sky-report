@@ -7,6 +7,7 @@ import WeatherButton from './components/WeatherButton'
 import Loading from './components/Loading'
 import Error from './components/Error'
 import WeatherHourly from './components/WeatherHourly'
+import WeatherState from './components/WeatherState'
 
 const cities = ['current', 'hanoi', 'paris', 'new york', 'seoul']
 const API_KEY = import.meta.env.VITE_API_KEY
@@ -154,6 +155,7 @@ function App() {
         handleCityChange={handleCityChange}
         selectedCity={city}
       />
+      <WeatherState todayWeather={todayWeather} />
       <WeatherHourly weatherList={weatherList} />
     </div>
   )
