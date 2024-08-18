@@ -48,14 +48,14 @@ const WeatherCard = ({ todayWeather }) => {
 
   return (
     <div
-      className='w-full h-full bg-slate-400 min-w-[440px] min-h-[600px]'
+      className='w-full h-full bg-slate-400 min-w-[440px] min-h-[500px]'
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      <div className='w-full min-h-[600px] flex flex-col justify-end p-4 gap-4'>
+      <div className='w-full min-h-[500px] flex flex-col justify-end p-4 gap-4'>
         <div className='flex gap-2'>
           <div className='flex gap-1'>
             <h2 className='text-stone-100 font-bold text-4xl'>
